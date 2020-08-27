@@ -1,0 +1,40 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deploy
+spec:
+  selector:
+    matchLabels:
+      app: hello-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-app
+    spec:
+      containers:
+      - name: hellocont
+        image: maktumsab/java-web-app:latest
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: "1"
+          requests:
+            memory: 500Mi
+            cpu: 250m
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app
+spec:
+  ports:
+    - name: helloport
+      port: 8080
+  type: LoadBalancer
+  selector:
+    app: hello-app
