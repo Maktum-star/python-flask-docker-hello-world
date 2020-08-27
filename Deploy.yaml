@@ -34,7 +34,7 @@ metadata:
 spec:
   ports:
     - name: helloport
-      port: 8080
+      port: 5000
   type: LoadBalancer
   selector:
     app: hello-app
